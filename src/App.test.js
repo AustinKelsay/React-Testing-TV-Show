@@ -27,13 +27,16 @@ test("correct episodes populate when you select a season", async () => {
     act(() => {
       mockfetchShow.mockResolvedValueOnce(data);
     });
+
     const { getByTestId, getByText } = render(<App />);
+
     await wait(() => {
       getByText(/Select a season/i);
     });
+    
     const dropDown = getByText(/Select a season/i);
     userEvent.click(dropDown);
-    // fireEvent.change(dropDown, {value: "Season 1"})
+
     const text = getByText(/Season 1/i);
     expect(text).toBeInTheDocument();
     userEvent.click(text);
